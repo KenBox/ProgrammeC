@@ -1,0 +1,137 @@
+#include "stdafx.h"
+/*
+综合练习：
+一个班，有 4  个学员、共学习 5 门课程，要求编程完成如下三个功能：
+
+(1)求出 第 5 门课程的平均分
+(2)找出平均成绩在 90 分以上的学员
+(3)找出全部课程成绩都在 85 分以上的学员.
+(4)找出有两门以上功课不及格的学员，输出他们的学号和全部课程成绩和平均分 (选做)
+*/
+
+//求和
+int GetSum(int _arr_Array[],int _length){
+	int Sum = 0;
+	for(int i=0;i<_length;i++){
+		Sum+=_arr_Array[i];
+	}
+
+	return Sum;
+}
+
+//求平均值
+int GetAvg(int _arr_Array[],int _length){
+	return GetSum(_arr_Array,_length)/_length;
+}
+
+//用递归函数求阶乘
+int GetFactorial(int _Num){
+	if (_Num == 1 ){
+		return 1;
+	}
+	return (_Num*GetFactorial(_Num-1));
+}
+
+//求数组最大值
+int GetArrMax(int _arr_Array[],int _length){
+	int max = 0;
+	for(int i=0;i<_length-1;i++){
+		if(_arr_Array[i]>_arr_Array[i+1]){
+			max = _arr_Array[i];
+			int temp;
+			temp = _arr_Array[i];
+			_arr_Array[i] = _arr_Array[i+1];
+			_arr_Array[i+1] = temp;
+		}else{
+			max = _arr_Array[i+1];
+		}
+	}
+	return max;
+}
+
+//求数组最小值
+int GetArrMin(int _arr_Array[],int _length){
+	int min = 0;
+	for(int i=0;i<_length-1;i++){
+		if(_arr_Array[i]<_arr_Array[i+1]){
+			min = _arr_Array[i];
+			int temp;
+			temp = _arr_Array[i];
+			_arr_Array[i] = _arr_Array[i+1];
+			_arr_Array[i+1] = temp;
+		}else{
+			min = _arr_Array[i+1];
+		}
+	}
+	return min;
+}
+
+//4.4.1 任务描述
+//两数值的谐均值可以这样计算：首先对两数值的倒数取平均值，最后再取倒数。编写一个带有两个double参数的函数，计算这两个参数的谐均值。
+	double FunctionA(double _num1,double _num2){
+		double Res = 0;
+		Res = 1/((1/_num1+1/_num2)/2);
+		return Res;
+	}
+
+
+
+//4.5.1 任务描述
+//编写并测试一个函数Fibonacci()，在该函数中使用循环代替递归完成斐波纳契数列的计算。
+	int Fibonacci(int _num){
+		int Res = 0;
+		int i = 1;
+		int j = 1;
+		for (int k = 0;k<_num;k++){
+			Res = i+j;
+			j+=i;
+			i=Res-i;
+			printf("%d ",Res);
+		}
+		getchar();
+
+		return 0;
+	}
+
+
+//4.5.1 任务描述
+//编写并测试一个函数。函数的三个参数是一个字符和两个数字。字符参数是要输出的字符，第一个整数说明了该行中输出字符的个数，第二个字符说明了需要输出的行数。
+	void FunctionB(char _ch,int _row,int _coloumn){
+		for(int i=0;i<_row;i++){
+			for(int j=0;j<_coloumn;j++){
+				printf("%c",_ch);
+			}
+			printf("\n");
+		}
+
+
+		return;
+	}
+
+//	5.1.1 作业任务
+//写一个函数，输入一个四位的数字，要求输出这四个数字字符，但每两个数字之间空一空格。
+	void FunctionC(int _num){
+		int a,b,c,d;
+		a = _num%1000%100%10;//个位数
+		b = (_num%1000%100-a)/10;//十位数
+		c = (_num%1000-b*10-a)/100;
+		d = (_num-c*100-b*10-a)/1000;
+		printf("%c,%c,%c,%c\n",d,c,b,a);
+		return;
+	}
+
+//5.2.1 作业任务
+//写一个函数，使给定的二维函数进行行列转换，例如3×4，转换成4×3，并输出结果，   
+//最后将首元素置尾，其他元素前移一位。
+	/*
+	void ArrayExchange(int _arr[][],int _len1,int _len2){
+		int arr2[_len2][_len1];
+		for(int i=0;i<_len1;i++){
+			for(int j=0;j<_len2;j++){
+				arr2[j][i]=_arr[i][j];
+			}
+		}
+		printf("/n========交换后的数组========/n");
+		return;
+	}
+	*/

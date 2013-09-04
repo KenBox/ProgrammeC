@@ -6,12 +6,6 @@
 #include "stdlib.h"
 #include "MyFunction.h"
 
-
-//求和
-int GetSum(int _arr_Array[],int _length);
-//求平均值
-int GetAvg(int _arr_Array[],int _length);
-
 int _tmain(int argc, _TCHAR* argv[])
 {
 /*
@@ -23,6 +17,7 @@ int _tmain(int argc, _TCHAR* argv[])
 (3)找出全部课程成绩都在 85 分以上的学员.
 (4)找出有两门以上功课不及格的学员，输出他们的学号和全部课程成绩和平均分 (选做)
 */
+	/*
 	int arr_Score[4][5]={{68,88,76,67,90},
 						 {97,54,66,52,78},
 						 {89,84,96,91,88},
@@ -95,20 +90,104 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	}
 
-	return 0;
-}
+	//递归函数求阶乘
+	int N;
+	N = GetFactorial(6);
+	printf("6的阶乘等于:%d",N);
+	getchar();
+		
 
-//求和
-int GetSum(int _arr_Array[],int _length){
-	int Sum = 0;
-	for(int i=0;i<_length;i++){
-		Sum+=_arr_Array[i];
+
+	//用函数求数组的最大最小值
+	int arr_aaa[10] = {5,44,32,65,34,54,2,15,2,43};
+	int max;
+	int min;
+	min = GetArrMin(arr_aaa,10);
+	max = GetArrMax(arr_aaa,10);
+
+	printf("max = %d ; min = %d \n",max,min);
+	getchar();
+	
+	//4.4.1 任务描述
+	//两数值的谐均值可以这样计算：首先对两数值的倒数取平均值，最后再取倒数。编写一个带有两个double参数的函数，计算这两个参数的谐均值。
+	double num1 = 12307;
+	double num2 = 4087;
+	double Res;
+
+	Res = FunctionA(num1,num2);
+	printf("num1 = %lf , num2 = %lf\n这两个数的谐均值为:%lf\n",num1,num2,Res);
+	getchar();
+	
+
+	//4.5.1 任务描述
+	//编写并测试一个函数Fibonacci()，在该函数中使用循环代替递归完成斐波纳契数列的计算。
+	Fibonacci(20);
+	
+
+
+	//4.5.1 任务描述
+	//编写并测试一个函数。函数的三个参数是一个字符和两个数字。字符参数是要输出的字符，第一个整数说明了该行中输出字符的个数，第二个字符说明了需要输出的行数。
+	FunctionB('a',4,5);
+	getchar();
+
+	
+
+	//	5.1.1 作业任务
+	//写一个函数，输入一个四位的数字，要求输出这四个数字字符，但每两个数字之间空一空格。
+	int num;
+	printf("请输入一个四位数字:\n");
+	scanf_s("%d",&num);
+	while(num>9999||num<1000){
+		num = 0;
+		printf("输入错误请重新输入一个四位数字:");
+	}
+	while(num<10000&&num>999){
+		FunctionC(num);
+		getchar();
+		break;
 	}
 
-	return Sum;
-}
+	*/
 
-//求平均值
-int GetAvg(int _arr_Array[],int _length){
-	return GetSum(_arr_Array,_length)/_length;
+	//5.2.1 作业任务
+	//写一个函数，使给定的二维函数进行行列转换，例如3×4，转换成4×3，并输出结果，   
+	//最后将首元素置尾，其他元素前移一位。
+	int arr_abc[3][4];
+	
+	for (int i=0;i<3;i++){
+		for (int j=0;j<4;j++){
+			printf("请输入一个整数:\n");
+			scanf_s("%d",&arr_abc[i][j]);
+		}
+	}
+	printf("\n=========原始数组===========\n");
+	for (int i=0;i<3;i++){
+		for (int j=0;j<4;j++){
+			printf("%d\t",arr_abc[i][j]);
+		}
+		printf("\n");
+	}
+	printf("\n==========交换数组中===========\n");
+	int arr_abc2[4][3];
+	for (int i=0;i<3;i++){
+		for (int j=0;j<4;j++){
+			arr_abc2[j][i]=arr_abc[i][j];
+		}
+	}
+	printf("\n==========交换后数组===========\n");
+	for (int i=0;i<4;i++){
+		for (int j=0;j<3;j++){
+			printf("%d\t",arr_abc2[i][j]);
+		}
+		printf("\n");
+	}
+
+	getchar();
+	getchar();
+	getchar();
+
+
+
+
+	return 0;
 }

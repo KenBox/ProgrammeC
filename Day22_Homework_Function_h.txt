@@ -1,0 +1,46 @@
+#include "stdafx.h"
+/*
+综合练习：
+一个班，有 4  个学员、共学习 5 门课程，要求编程完成如下三个功能：
+
+(1)求出 第 5 门课程的平均分
+(2)找出平均成绩在 90 分以上的学员
+(3)找出全部课程成绩都在 85 分以上的学员.
+(4)找出有两门以上功课不及格的学员，输出他们的学号和全部课程成绩和平均分 (选做)
+*/
+
+//求和
+int GetSum(int _arr_Array[],int _length);
+
+//求平均值
+int GetAvg(int _arr_Array[],int _length);
+
+//用递归函数求阶乘
+int GetFactorial(int _Num); 
+
+//求数组最大值
+int GetArrMax(int _arr_Array[],int _length);
+
+//求数组最小值
+int GetArrMin(int _arr_Array[],int _length);
+
+//4.4.1 任务描述
+//两数值的谐均值可以这样计算：首先对两数值的倒数取平均值，最后再取倒数。编写一个带有两个double参数的函数，计算这两个参数的谐均值。
+double FunctionA(double _num1,double _num2);
+
+//4.5.1 任务描述
+//编写并测试一个函数Fibonacci()，在该函数中使用循环代替递归完成斐波纳契数列的计算。
+int Fibonacci(int _num);
+
+//4.5.1 任务描述
+//编写并测试一个函数。函数的三个参数是一个字符和两个数字。字符参数是要输出的字符，第一个整数说明了该行中输出字符的个数，第二个字符说明了需要输出的行数。
+void FunctionB(char _ch,int _num1,int _num2);
+
+//	5.1.1 作业任务
+//写一个函数，输入一个四位的数字，要求输出这四个数字字符，但每两个数字之间空一空格。
+void FunctionC(int _num);
+
+//5.2.1 作业任务
+//写一个函数，使给定的二维函数进行行列转换，例如3×4，转换成4×3，并输出结果，   
+//最后将首元素置尾，其他元素前移一位。
+//void ArrayExchange(int _arr[][],int _len1,int _len2);
