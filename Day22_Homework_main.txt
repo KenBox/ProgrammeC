@@ -1,0 +1,114 @@
+// My Project.cpp : 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include "string.h"
+#include "stdlib.h"
+#include "MyFunction.h"
+
+
+//求和
+int GetSum(int _arr_Array[],int _length);
+//求平均值
+int GetAvg(int _arr_Array[],int _length);
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+/*
+综合练习：
+一个班，有 4  个学员、共学习 5 门课程，要求编程完成如下三个功能：
+
+(1)求出 第 5 门课程的平均分
+(2)找出平均成绩在 90 分以上的学员
+(3)找出全部课程成绩都在 85 分以上的学员.
+(4)找出有两门以上功课不及格的学员，输出他们的学号和全部课程成绩和平均分 (选做)
+*/
+	int arr_Score[4][5]={{68,88,76,67,90},
+						 {97,54,66,52,78},
+						 {89,84,96,91,88},
+						 {92,90,99,89,87}};
+
+	while(1>0){
+		int arr[4];//按课程排列
+		int Avg = 0;//平均分
+		int arr1[5];//按学号排列
+		int k = 0;//计数用(小于60分k++)
+		printf("\n请选择1-4，输入10退出程序:\n");
+		int Select = 0;
+		scanf_s("%d",&Select);
+		switch(Select){
+		case 1: printf("求出第五门课程的平均分\n");
+				for(int i=0;i<4;i++){
+					arr[i]=arr_Score[i][4];
+				}
+				Avg = GetAvg(arr,4);
+				printf("第五门课平均分是:%d分\n",Avg);
+			break;
+		case 2:
+			for(int i=0;i<4;i++){
+				for(int j=0;j<5;j++){
+					arr1[j]=arr_Score[i][j];
+				}
+				Avg = GetAvg(arr1,5);
+				if (Avg>=85){
+					printf("学生编号%d：	平均成绩为:%d分\n",i+1,Avg);
+				}
+			}
+			break;
+		case 3:
+			for(int i=0;i<4;i++){
+				for(int j=0;j<5;j++){
+					if (arr_Score[i][j]<85){
+						break;
+					}else if(j==4){
+						printf("学生编号%d:  每门课成绩都在85分以上。\n",i+1);
+					}
+				}
+			}
+			break;
+		case 4:
+			for(int i=0;i<4;i++){
+				k = 0;
+				for(int j=0;j<5;j++){
+					arr1[j]=arr_Score[i][j];//学号(i+1)五门课的成绩数组
+					if (arr_Score[i][j]<60){
+						k++;//k计数用(小于60分k++)
+					}
+				}
+				//判断k的大小
+				if (k>=2){
+					Avg = GetAvg(arr1,5);
+					printf("学生编号%d: 考试两次以上不及格:\n",i+1);
+					for(int j1=0;j1<5;j1++){
+						printf("学科%d:  %d分\t",j1+1,arr_Score[i][j1]);
+					}
+					printf("\n个人平均分: %d",Avg);
+				}
+			}
+			break;
+		case 10:
+			exit(-1);
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	return 0;
+}
+
+//求和
+int GetSum(int _arr_Array[],int _length){
+	int Sum = 0;
+	for(int i=0;i<_length;i++){
+		Sum+=_arr_Array[i];
+	}
+
+	return Sum;
+}
+
+//求平均值
+int GetAvg(int _arr_Array[],int _length){
+	return GetSum(_arr_Array,_length)/_length;
+}
