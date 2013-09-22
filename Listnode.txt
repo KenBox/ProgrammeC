@@ -1,0 +1,201 @@
+// Listnode.cpp : 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include "stdlib.h"
+typedef int DataType;
+
+typedef struct node{
+	DataType data;
+	struct node* next;//后继结点
+}listnode;
+typedef listnode* LinkList;
+listnode* head;//头指针
+listnode* p;//工作指针
+
+//CreatList方法,返回头指针
+listnode* CreatList(DataType _data){
+	p=(listnode*)malloc(sizeof(listnode));//生成结点p
+	if(p==0){
+		printf("内存分配错误，退出程序\n");
+		exit(-1);
+	}
+	p->data=_data;
+	p->next=NULL;
+	head=p;
+	return head;
+}
+//AddList方法，头插入，返回头指针
+listnode* AddList(DataType _data,listnode* head){
+	//先创造一个空结点
+	p=(listnode*)malloc(sizeof(listnode));//生成结点p
+	if(p==0){
+		printf("内存分配错误，退出程序\n");
+		exit(-1);
+	}
+	//放入data数据
+	p->data=_data;
+	p->next=head;
+	head=p;
+	//printf("头结点 head = %p,生成结点 p = %p,后继结点next = %p\n",head,p,p->next);
+	//printf("head->data = %d,head->next = %p\n",p->data,p->next);
+	//printf("===================\n");
+	return head;
+}
+
+//PrintList
+void PrintList(listnode* head){
+	p=head;
+	int i=1;
+	while(p!=NULL){
+		printf("链表中第%d个结点数据为%d\n",i,p->data);
+		i++;
+		p=p->next;
+	}
+	return;
+}
+
+//FindList_Data方法
+void FindList_Data(DataType _data,listnode* head){
+	p=head;
+	int nCount=0;
+	while(p!=NULL){
+		if(p->data==_data){
+			nCount++;
+			p=p->next;
+			continue;
+		}
+		p=p->next;
+	}
+	if(nCount==0){
+		printf("没有找到匹配的数据\n");
+	}else{
+		printf("data = %d\n找到%d个匹配的数据\n",_data,nCount);
+	}
+	return;
+}
+//找到指定值，返回p指针
+listnode *GetList_Data(DataType _data,listnode* head){
+	p=head;
+	while(p!=NULL){
+		if(p->data==_data){
+			printf("找到匹配数据\n");
+			return p;
+		}
+		p=p->next;
+	}
+	printf("没有找到匹配的数据\n");
+	return p;
+}
+
+//CountList方法
+void CountList(listnode* head){
+	p=head;
+	int nCount=0;
+	while(p!=NULL){
+		p=p->next;
+		nCount++;
+	}
+	printf("head链表中共有%d个结点\n",nCount);
+	return;
+}
+//DeleteList方法,返回头指针
+listnode* DeleteList(DataType _data,listnode* head){
+	//先查找需要删除结点位置
+	p=head;
+	listnode *q;//p为前结点,q为后结点
+	q=head;
+	//头结点单独处理
+	if(q->data==_data){
+		head=q->next;
+		free(q);
+		q=NULL;
+		p=NULL;
+		printf("删除成功\n");
+		return head;
+	}
+	//q从第二结点开始查找
+	while(q->next!=NULL){
+		q=q->next;
+		//找到匹配的元素
+		if(q->data==_data){
+			p->next=q->next;
+			q->next=NULL;
+			free(q);
+			q=NULL;
+			p=NULL;
+			printf("删除成功\n");
+			return head;
+		}
+		p=p->next;
+	}
+	if(p==NULL){
+		printf("删除失败，没有找到匹配的元素\n");
+		p=head;
+	}
+	return head;
+}
+
+//InsertList插入
+listnode* InsertList(DataType _data,int _index,listnode* head){
+	//先比较插入位置_index与数据个数
+	p=head;
+	int nCount=0;//nCount计算结点个数
+	while(p!=NULL){
+		p=p->next;
+		nCount++;
+	}
+	//_index小等于0或大等于结点个数，调用AddList方法，从头部插入数据
+	if(_index<=0||_index>=nCount){
+		_index=0;
+		head = AddList(_data,head);
+		return head;
+	}
+	//初始化结点q
+	p=head;
+	listnode* q=(listnode*)malloc(sizeof(listnode));
+	q->data=_data;
+	q->next=NULL;
+	//p指针移动到_index-1位置
+	for(int i=0;i<_index-1;i++){
+		p=p->next;
+	}
+	q->next=p->next;
+	p->next=q;
+
+
+	return head;
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	head = CreatList(130);
+	head = AddList(12,p);
+	head = AddList(13,p);
+	head = AddList(11,p);
+	head = AddList(100,p);
+
+
+
+	p = GetList_Data(12,head);
+	printf("p->data = %d\n",p->data);
+	FindList_Data(100,head);
+	CountList(head);
+	head = DeleteList(12,head);
+	head = InsertList(200,1,head);
+	head = InsertList(98,1,head);
+	CountList(head);
+	printf("\n\n");
+	PrintList(head);
+	//printf("头结点 head = %p,生成结点 p = %p,后继结点next = %p\n",head,p,p->next);
+	//printf("head->data = %d,head->next = %p\n",p->data,p->next);
+	
+	getchar();
+
+
+
+
+
+	return 0;
+}
+
